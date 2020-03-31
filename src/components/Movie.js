@@ -12,7 +12,7 @@ const LIKE_MOVIE = gql`
 
 const Container = styled.div`
   height: 400px;
-  border-radius: 7px;
+  border-radius: 10px;
   width: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 7px;
@@ -26,6 +26,15 @@ const Poster = styled.div`
   background-position: center center;
 `;
 
+const btnStyle = {
+  color: "rgba(0, 0, 0, 0.5)",
+  background: "none",
+  border: "0px solid teal",
+  borderRadius: ".25rem",
+  fontSize: "1rem",
+  lineHeight: 1.5
+};
+
 export default ({ id, bg, isLiked }) => {
   const [toggleMovie] = useMutation(LIKE_MOVIE, {
     variables: { id: parseInt(id), isLiked }
@@ -35,7 +44,9 @@ export default ({ id, bg, isLiked }) => {
       <Link to={`/${id}`}>
         <Poster bg={bg} />
       </Link>
-      <button onClick={toggleMovie}>{isLiked ? "❤️" : "👍"}</button>
+      <button style={btnStyle} onClick={toggleMovie}>
+        {isLiked ? "❤️" : "➕"}
+      </button>
     </Container>
   );
 };
